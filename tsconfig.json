@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "outFile": "./dist/app.js",
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "module": "system",
+    "target": "es6",
+    "allowJs": false
+  },
+  "include": [
+    "./src/*"
+  ]
+}

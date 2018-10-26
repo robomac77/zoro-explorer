@@ -1,0 +1,14 @@
+C:\Users\CV-PC\Desktop\blacat explorer\BlackCat-Explorer\bin\webapp.dll.config
+C:\Users\CV-PC\Desktop\blacat explorer\BlackCat-Explorer\bin\webapp.dll
+C:\Users\CV-PC\Desktop\blacat explorer\BlackCat-Explorer\bin\webapp.pdb
+C:\Users\CV-PC\Desktop\blacat explorer\BlackCat-Explorer\obj\Debug\webapp.csprojAssemblyReference.cache
+C:\Users\CV-PC\Desktop\blacat explorer\BlackCat-Explorer\obj\Debug\webapp.csproj.CoreCompileInputs.cache
+C:\Users\CV-PC\Desktop\blacat explorer\BlackCat-Explorer\obj\Debug\webapp.dll
+C:\Users\CV-PC\Desktop\blacat explorer\BlackCat-Explorer\obj\Debug\webapp.pdb
+D:\Software Development\Projects\BlackCat-Explorer\bin\webapp.dll.config
+D:\Software Development\Projects\BlackCat-Explorer\bin\webapp.dll
+D:\Software Development\Projects\BlackCat-Explorer\bin\webapp.pdb
+D:\Software Development\Projects\BlackCat-Explorer\obj\Debug\webapp.csprojAssemblyReference.cache
+D:\Software Development\Projects\BlackCat-Explorer\obj\Debug\webapp.csproj.CoreCompileInputs.cache
+D:\Software Development\Projects\BlackCat-Explorer\obj\Debug\webapp.dll
+D:\Software Development\Projects\BlackCat-Explorer\obj\Debug\webapp.pdb

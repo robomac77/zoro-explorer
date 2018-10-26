@@ -1,0 +1,723 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link class="icon" rel="icon" href="./img/zicon.png">
+
+    <title>
+        ZoroChain Explorer
+    </title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./css/bootstrap.css" rel="stylesheet">
+    <link href="./css/mystyle.css" rel="stylesheet">
+    <link id="netCss" href="./css/mainnet.css" rel="stylesheet" />
+    <!-- <link href="./css/bootstrap-table.css" rel="stylesheet"> -->
+    <!-- Custom styles for this template -->
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <![endif]-->
+    <base target="_self" />
+</head>
+
+<body onhashchange="onhash()">
+    <div class="container">
+        <!-- Static navbar -->
+        <!--/.nav-collapse -->
+        <!--/.container-fluid -->
+
+        <nav class="navbar navbar-nel navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                            aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <span class="navbar-brand">ZoroChain</span>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li id="index-btn">
+                            <a id="indexa">Explore</a>
+							
+                        </li>
+                        <li id="brow-btn">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span id="browsea">Dashboard</span>
+                                <span class="caret"></span>
+							
+                            </a>
+                            <ul class="dropdown-nel">
+                                <li id="blocks-btn">
+                                    <a id="blocksa">Blocks</a>
+                                </li>
+                                <li id="txlist-btn">
+                                    <a id="txlista">Transactions</a>
+                                </li>
+                                <li id="addrs-btn">
+                                    <a id="addrsa">Addresses</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li id="asset-btn">
+                            <a id="assetsa">Assets</a>
+                        </li>
+                        <!-- <li id="wallet-btn">
+                            <a id="walleta" target="_blank">Wallet</a>
+                        </li>
+                        <li id="nns-btn">
+                            <a id="nnssa">NNS Events</a>
+                        </li> -->
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span class="text" id="network">TestNet</span>
+                                <span class=" caret"></span>
+                            </a>
+                            <ul class="dropdown-nel">
+                                <li id="testnet-btn">
+                                    <a id="testa">TestNet</a>
+                                </li>
+                                <li id="mainnet-btn">
+                                    <a id="maina">MainNet</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- <li>
+                            <a href="http://www.xiaoyaoji.cn/share/1H0gjTDtfk/" target="_blank">API</a>
+                        </li> -->
+                        <li>
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span class="text" id="lanuage-btn">English</span>
+                                <span class=" caret"></span>
+                            </a>
+                            <ul class="dropdown-nel">
+                                <li>
+                                    <a id="en-btn">English</a>
+                                </li>
+                                <li>
+                                    <a id="cn-btn">中文</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="navbar-form navbar-right input-append">
+                        <div class="input-group" id="nel-search">
+                            <input id="searchText" type="text" class="form-control nel" placeholder="Block Height , Hash , Address , or Transaction id" autocomplete="off">
+                            <span id="searchBtn" class="input-group-addon nel ">
+                                <img src="./fonts/search.svg" width="18" height="18" />
+                            </span>
+                        </div>
+                        <div class="seach-list">
+                            <ul id="seach_list"></ul>
+                        </div>
+                    </div>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+            <!--/.container -->
+        </nav>
+        <!--</nav>-->
+        <!-- Main component for a primary marketing message or call to action -->
+        <!-- 首页 -->
+        <div id="index-page" >
+            <div class=" container-nel">
+                <div class="title">
+                    <span id="i_summary">Dashboard</span>
+                </div>
+                <div class="row summary">
+                    <div class="col-md-4 ">
+                        <div class="block">
+                            <div class="caption">
+                                <div class="title-summary" id="i_lastblock">Last block</div>
+                                <div class="number" id="blockHeight">0</div>
+                                <div>
+                                    <a id="i_allblock" class="btn btn-nel" target="_self">View all blocks</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 ">
+                        <div class="block">
+                            <div class="caption">
+                                <div class="title-summary" id="i_totaltrans">Total transactions</div>
+                                <div class="number" id="txcount">0</div>
+                                <div>
+                                    <a id="i_alltxlist" class="btn btn-nel" target="_self">View all transactions</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 ">
+                        <div class="block">
+                            <div class="caption">
+                                <div class="title-summary" id="i_walletcreate">Wallet address created</div>
+                                <div class="number" id="addrCount">0</div>
+                                <div>
+                                    <a id="i_alladdress" class="btn btn-nel" target="_self">View all addresses</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="title">
+                        <span id="i_last10">Last 10 Blocks</span>
+                    </div>
+                    <div class="last-info">
+                        <table class="table table-nel cool" id="blocks">
+                            <thead>
+                                <tr>
+                                    <th id="i_last10_height">Height</th>
+                                    <th id="i_last10_size">Size</th>
+                                    <th id="i_last10_ctm">Created at</th>
+                                    <th id="i_last10_txcount">Tx count</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <div class="tfood">
+                            <a id="i_viewblocks" href="#blocks-page" target="_self">View all &nbsp; >>>></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="title">
+                        <span id="i_last10t">Last 10 Transactions</span>
+                    </div>
+                    <div class="last-info">
+                        <table class="table cool table-nel" id="transactions">
+                            <thead>
+                                <tr>
+                                    <th id="i_last10t_txid">TXID</th>
+                                    <th id="i_last10t_type">Type</th>
+                                    <th id="i_last10t_height">Height</th>
+                                    <th id="i_last10t_size">Size</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <div class="tfood">
+                            <a class="" id="i_viewtxlist" target="_self">View all &nbsp; >>>></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 区块列表页面 -->
+        <div id="blocks-page" class="container-nel" hidden style="min-height: 619px;">
+            <div class="title">
+                <span id="blocks_title">Blocks</span>
+            </div>
+            <table class="table table-nel cool">
+                <thead>
+                    <tr>
+                        <th id="blocks_height">Height</th>
+                        <th id="blocks_size">Size</th>
+                        <th id="blocks_time">Time</th>
+                        <th id="blocks_txcount">Tx count</th>
+                    </tr>
+                </thead>
+                <tbody id="blocks"></tbody>
+            </table>
+            <div class="page-number">
+                <span id="blocks-page-msg"></span>
+            </div>
+            <div class="page">
+                <div id="blocks-page-previous" class="page-previous">
+                    <img src="./img/lefttrangle.svg" alt="">
+                </div>
+                <div style="width:1px;"></div>
+                <div id="blocks-page-next" class="page-next">
+                    <img src="./img/righttrangle.svg" alt="">
+                </div>
+            </div>
+        </div>
+        <!-- 交易列表页面 -->
+        <div id="txlist-page" class="container-nel" hidden style="min-height: 619px;">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="title">
+                        <span id="trans_title">Transactions</span>
+                    </div>
+                </div>
+                <div class="col-md-2" style="padding-top:80px">
+                    <select id="TxType" class="form-control">
+                        <option value="">Any</option>
+                        <option value="EnrollmentTransaction">Enrollment</option>
+                        <option value="PublishTransaction">Publish</option>
+                        <option value="InvocationTransaction">Invocation</option>
+                        <option value="ClaimTransaction">Claim</option>
+                        <option value="MinerTransaction">Miner</option>
+                        <option value="RegisterTransaction">Register</option>
+                        <option value="IssueTransaction">Issue</option>
+                        <option value="ContractTransaction">Contract</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="list-nel">
+                <div class="list-head">
+                    <div class="title-content"><span id="trans_txid">TXID</span></div>
+                    <div class="title-content"><span id="trans_type">Type</span></div>
+                    <div class="title-content"><span id="trans_size">Size</span></div>
+                    <div class="title-content"><span id="trans_height">Height</span></div>
+                    <div class="title-nel" style="width:60px;"></div>
+                </div>
+                <div class="list-body" id="txlist-page-transactions">
+                </div>
+            </div>
+            <div class="page-number">
+                <span id="txlist-page-msg"></span>
+            </div>
+            <div class="page">
+                <div id="txlist-page-previous" class="page-previous">
+                    <img src="./img/lefttrangle.svg" alt="">
+                </div>
+                <div style="width:1px;"></div>
+                <div id="txlist-page-next" class="page-next">
+                    <img src="./img/righttrangle.svg" alt="">
+                </div>
+            </div>
+        </div>
+        <!-- 资产页面 -->
+        <div id="asset-page" class="container-nel" hidden style="min-height: 619px;">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="title">
+                        <span id="assets_title">Assets</span>
+                    </div>
+                </div>
+                <div class="col-md-2" style="padding-top:80px">
+                    <select id="asset-TxType" class="form-control">
+                        <option value="Assets">Assets</option>
+                        <option value="Nep5">Nep5</option>
+                    </select>
+                </div>
+            </div>
+            <table class="table cool table-nel">
+                <thead>
+                    <tr>
+                        <th id="assets_asset">Asset</th>
+                        <th id="assets_id">ID</th>
+                        <th id="assets_type">Type</th>
+                        <th id="assets_ava">Available</th>
+                        <th id="assets_pre">Precision</th>
+                    </tr>
+                </thead>
+                <tbody id="assets"></tbody>
+            </table>
+            <div class="page-number">
+                <span id="asset-page-msg"></span>
+            </div>
+            <div class="page">
+                <div id="asset-page-previous" class="page-previous">
+                    <img src="./img/lefttrangle.svg" alt="">
+                </div>
+                <div style="width:1px;"></div>
+                <div id="asset-page-next" class="page-next">
+                    <img src="./img/righttrangle.svg" alt="">
+                </div>
+            </div>
+        </div>
+        <!-- 地址页面 -->
+        <div id="addrs-page" class="container-nel" hidden style="min-height: 619px;">
+            <div class="title">
+                <span id="addrs_title">Address list</span>
+            </div>
+            <table class="table table-nel cool">
+                <thead>
+                    <tr>
+                        <th id="addrs_addr">Address</th>
+                        <th id="addrs_first">First transaction time</th>
+                        <th id="addrs_last">Last transaction time</th>
+                        <th id="addrs_txcount">Txcount</th>
+                    </tr>
+                </thead>
+                <tbody id="addrlist"></tbody>
+            </table>
+            <div class="page-number">
+                <span id="addrs-page-msg"></span>
+            </div>
+            <div class="page">
+                <div id="addrs-page-previous" class="page-previous">
+                    <img src="./img/lefttrangle.svg" alt="">
+                </div>
+                <div style="width:1px;"></div>
+                <div id="addrs-page-next" class="page-next">
+                    <img src="./img/righttrangle.svg" alt="">
+                </div>
+				
+            </div>
+        </div>
+        
+        <!--区块详情-->
+        <div id="block-info" style="min-height: 619px;">
+            <div class="title">
+                <span id="block_info_title">Block Information</span>
+                <div class="go-back" id="goallblock"></div>
+            </div>
+            <div class="list-nel">
+                <div class="list-body">
+                    <div class="line"><div class="title-nel"><span id="block_info_block">Block</span></div> <div class="content-nel"><span id="index"></span></div></div>
+                    <div class="line"><div class="title-nel"><span id="block_info_hash">Hash</span></div> <div class="content-nel"><span id="hash"></span></div></div>
+                    <div class="line"><div class="title-nel"><span id="block_info_time">Time</span></div> <div class="content-nel"><span id="time"></span></div></div>
+                    <div class="line"><div class="title-nel"><span id="block_info_size">Size</span></div><div class="content-nel"><span id="size"></span></div></div>
+                    <div class="line"><div class="title-nel"><span id="block_info_pre">Previous Block</span></div><div class="content-nel"><span id="previos-block"></span></div></div>
+                    <div class="line"><div class="title-nel"><span id="block_info_next">Next Block</span></div><div class="content-nel"><span id="next-block"></span></div></div>
+                </div>
+            </div>
+            <div class="title">
+                <span id="block_info_tran">Transactions</span>
+            </div>
+            <table class="table table-nel cool">
+                <thead>
+                    <tr>
+                        <th id="block_info_txid">TXID</th>
+                        <th id="block_info_type">Type</th>
+                        <th id="block_info_txsize">Size</th>
+                        <th id="block_info_ver">Version</th>
+                    </tr>
+                </thead>
+                <tbody id="txs"></tbody>
+            </table>
+            <div class="block-tran-page">
+                <div class="page-number">
+                    <span id="block-tran-msg"></span>
+                </div>
+                <div class="page">
+                    <div id="block-tran-previous" class="page-previous">
+                        <img src="./img/lefttrangle.svg" alt="">
+                    </div>
+                    <div style="width:1px;"></div>
+                    <div id="block-tran-next" class="page-next">
+                        <img src="./img/righttrangle.svg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--地址详情-->
+        <div id="address-info" style="min-height: 619px;">
+            <div class="container">
+                <div class="title">
+                    <span id="addr_title">Address Information</span>
+                    <div class="go-back" id="goalladress"></div>
+                </div>
+
+                <div class="list-nel">
+                    <div class="list-head">
+                        <div class="line">
+
+                        </div>
+                    </div>
+                    <div class="list-body" id="address-info">
+                        <div class="line">
+                            <div class="title-nel"><span id="addr_addr">Address</span></div>
+                            <div class="content-nel"><span id="address"></span></div>
+                        </div>
+                        <div class="line">
+                            <div class="title-nel"><span id="addr_ctm">Created</span></div>
+                            <div class="content-nel"><span id="created"></span></div>
+                        </div>
+                        <div class="line">
+                            <div class="title-nel"><span id="addr_tran">Transactions</span></div>
+                            <div class="content-nel"><span id="totalTran"></span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="title"><span id="addr_title2">Balance</span></div>
+                <div class="list-nel">
+                    <div class="list-head">
+                        <div class="line">
+
+                        </div>
+                    </div>
+                    <div class="list-body" id="balance">
+                        <div class="line">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="title"><span id="addr_title3">Transactions</span></div>
+                <div class="list-nel">
+                    <div class="list-head">
+                        <div class="title-content"><span id="addr_txid">TXID</span></div>
+                        <div class="title-content"><span id="addr_type">Type</span></div>
+                        <div class="title-content"><span id="addr_time">Time</span></div>
+                        <div class="title-nel" style="width:60px;"></div>
+                    </div>
+                    <div class="list-body" id="addr-trans">
+                    </div>
+                </div>
+                <div class="page-number">
+                    <span id="trans-page-msg"></span>
+                </div>
+                <div class="page" id="addr-trans-page">
+                    <div id="trans-previous" class="page-previous">
+                        <img src="./img/lefttrangle.svg" alt="">
+                    </div>
+                    <div style="width:1px;"></div>
+                    <div id="trans-next" class="page-next">
+                        <img src="./img/righttrangle.svg" alt="">
+                    </div>
+                </div>
+
+                <div class="title">
+                    <span>UTXO</span>
+                </div>
+                <table class="table table-nel cool">
+                    <thead>
+                        <tr>
+                            <th id="addr_utxo_asset">Asset</th>
+                            <th id="addr_utxo_number">Number</th>
+                            <th id="addr_utxo_txid">TXID</th>
+                        </tr>
+                    </thead>
+                    <tbody id="add-utxos"></tbody>
+                </table>
+                <div class="page-number">
+                    <span id="utxo-page-msg"></span>
+                </div>
+                <div class="page" id="addr-utxo-page">
+                    <div id="utxo-previous" class="page-previous">
+                        <img src="./img/lefttrangle.svg" alt="">
+                    </div>
+                    <div style="width:1px;"></div>
+                    <div id="utxo-next" class="page-next">
+                        <img src="./img/righttrangle.svg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--资产详情-->
+        <div id="asset-info" style="min-height: 619px;">
+            <div class="title">
+                <span id="asset_title">Asset Information</span>
+                <div class="go-back" id="goallasset"></div>
+            </div>
+            <div class="list-nel">
+                <div class="list-body">
+                    <div class="line"></div>
+                    <div class="line"><div class="title-nel"><span id="asset_id">ID</span></div> <div class="content-nel"><span id="id"></span></div></div>
+                    <div class="line"><div class="title-nel"><span id="asset_asset">Asset</span></div> <div class="content-nel"><span id="name"></span></div></div>
+                    <div class="line"><div class="title-nel"><span id="asset_type">Type</span></div> <div class="content-nel"><span id="asset-info-type"></span></div></div>
+                    <div class="line"><div class="title-nel"><span id="asset_ava">Available</span></div><div class="content-nel"><span id="available"></span></div></div>
+                    <div class="line"><div class="title-nel"><span id="asset_pre">Precision</span></div><div class="content-nel"><span id="precision"></span></div></div>
+                    <div class="line"><div class="title-nel"><span id="asset_adm">Admin</span></div><div class="content-nel"><span id="admin"></span></div></div>
+                </div>
+            </div>
+
+            <div class="asset-nep5-warp">
+                <div class="title"><span id="asset_title2">Balance Rank</span></div>
+                <table class="table cool table-nel">
+                    <thead>
+                        <tr>
+                            <th id="asset_rank">Rank</th>
+                            <th id="asset_addr">Address</th>
+                            <th id="asset_balance">Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody id="assets-balance-list"></tbody>
+                </table>
+                <div class="asset-balance-page">
+                    <div class="page-number">
+                        <span id="assets-balance-msg"></span>
+                    </div>
+                    <div class="page">
+                        <div id="assets-balance-previous" class="page-previous">
+                            <img src="./img/lefttrangle.svg" alt="">
+                        </div>
+                        <div style="width:1px;"></div>
+                        <div id="assets-balance-next" class="page-next">
+                            <img src="./img/righttrangle.svg" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="asset-tran-warp">
+                <div class="title"><span id="asset_title3">Transactions</span></div>
+                <table class="table cool table-nel">
+                    <thead>
+                        <tr>
+                            <th id="asset_txid">TXID</th>
+                            <th id="asset_from">From</th>
+                            <th id="asset_to">To</th>
+                            <th id="asset_height">Height</th>
+                        </tr>
+                    </thead>
+                    <tbody id="assets-tran-list"></tbody>
+                </table>
+                <div class="asset-tran-page">
+                    <div class="page-number">
+                        <span id="assets-tran-msg"></span>
+                    </div>
+                    <div class="page">
+                        <div id="assets-tran-previous" class="page-previous">
+                            <img src="./img/lefttrangle.svg" alt="">
+                        </div>
+                        <div style="width:1px;"></div>
+                        <div id="assets-tran-next" class="page-next">
+                            <img src="./img/righttrangle.svg" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--交易详情-->
+        <div id="transaction-info" style="min-height: 619px;">
+            <div class="title">
+                <span id="tran_title">Transaction Information</span>
+                <div class="go-back" id="goalltrans"></div>
+            </div>
+            <div class="list-nel">
+                <div class="list-head">
+                    <div class="line"><div class="title-nel"><span id="tran_title_1">Transaction </span></div></div>
+                </div>
+                <div class="list-body">
+                    <div class="line"><div class="title-nel"><span id="tran_txid">TXID</span></div> <div class="content-nel"><span id="txid"></span></div></div>
+                    <div class="line"><div class="title-nel"><span id="tran_type">Type</span></div> <div class="content-nel"><span id="type"></span></div></div>
+                    <div class="line"><div class="title-nel"><span id="tran_netfee">Network Fee</span></div><div class="content-nel"><span id="netfee"></span></div></div>
+                    <div class="line"><div class="title-nel"><span id="tran_sysfee">System Fee</span></div><div class="content-nel"><span id="sysfee"></span></div></div>
+                    <div class="line"><div class="title-nel"><span id="tran_size">Size</span></div><div class="content-nel"><span id="txsize"></span></div></div>
+                    <div class="line"><div class="title-nel"><span id="tran_height">Height</span></div><div class="content-nel"><span id="blockindex"></span></div></div>
+                    <div class="line"><div class="title-nel"><span id="tran_time">Time</span></div><div class="content-nel"><span id="transaction-time"></span></div></div>
+                </div>
+            </div>
+            <div style="padding-top:25px">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="list-nel">
+                            <div class="list-head">
+                                <div class="line"><div class="title-nel"><span id="tran_input">Input</span></div></div>
+                            </div>
+                            <div class="list-body" id="from">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="list-nel">
+                            <div class="list-head">
+                                <div class="line"><div class="title-nel"><span id="tran_output">Output</span></div></div>
+                            </div>
+                            <div class="list-body" id="to">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="txidnep-warp">
+                <div class="title">
+                    <span id="tran_nep5">Nep5</span>
+                </div>
+                <table class="table cool table-nel">
+                    <thead>
+                        <tr>
+                            <th id="tran_nep5_asset">Asset</th>
+                            <th id="tran_nep5_from">From</th>
+                            <th id="tran_nep5_to">To</th>
+                            <th id="tran_nep5_value">Value</th>
+                        </tr>
+                    </thead>
+                    <tbody id="txidnep5"></tbody>
+                </table>
+            </div>
+        </div>
+        
+
+        <div id="notfound" class="notfound" hidden>
+            <div>
+                <span>Oops! It looks like you are lost.</span>
+                <br>
+                <button class="btn">Go to Homepage</button>
+            </div>
+        </div>
+        <div style="height:100px;"></div>
+    </div>
+    <div id="footer-box" class="footer-box" hidden>
+        <div class="footer-warp">
+            <div class="footer-continar">
+                <div class="logo">
+                    <img src="./img/logo.png" alt="logo.png">
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="continar-box">
+                    <ul>
+                        <li>
+                            <a href="https://github.com/FunJumping">
+                                <img src="./img/github.png" alt="github.png">
+                            </a>
+                        </li>
+                        <!-- <li>
+                            <a href="https://jq.qq.com/?_wv=1027&k=5SahDHr">
+                                <img src="./img/qq_img.png" alt="qq_img.png">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://twitter.com/NeoNameService">
+                                <img src="./img/twitter-circle.png" alt="twitter-circle.png">
+                            </a>
+                        </li>
+                        <li class="webchat-box">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <img src="./img/webchat.png" alt="webchat.png">
+                            </a>
+                            <ul class="dropdown-nel">
+                                <li>
+                                    <img src="./img/NEL_economic.png" alt="NEL_economic.png">
+                                </li>
+                            </ul>
+                        </li> -->
+                    </ul>
+                </div>
+                <div class="footer-version">cli version: v2.7.6.1</div>
+            </div>
+        </div>
+    </div>
+    <!-- /container -->
+    <!-- modal -->
+    <div class="modal fade" id="errMsg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">提示</h4>
+                </div>
+                <div class="modal-body" id="errContent"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+    <!-- /modal -->
+    <!-- Bootstrap core JavaScript
+================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <input id="page" value="index" hidden>
+
+    <script src="./lib/jquery.min.js"></script>
+    <script src="./lib/bootstrap.min.js"></script>
+
+    <script src="./lib/neo-ts.js"></script>
+
+    <script src="./dist/app.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+</body>
+
+</html>
