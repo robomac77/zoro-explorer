@@ -26,7 +26,7 @@ namespace WebBrowser
                 
                 $.ajax({
                     type: 'POST',
-                    url: 'http://localhost:59908/api/testnet/' + arr[0],
+                    url: 'http://localhost:59908/api/testnet/'+ arr[0],
                     data: JSON.stringify({
                         "jsonrpc": "2.0",
                         "method": method,

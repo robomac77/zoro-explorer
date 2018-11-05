@@ -81,7 +81,7 @@
             let time = DateTool.getTime(block.time);
 
             $("#hash" ).text( block.hash );
-            $("#size" ).text( block.size + ' byte' );
+            $("#size" ).text( block.size + ' bytes' );
             $("#time").text(time);
             $("#version" ).text( block.version );
             $("#index").text(block.index);

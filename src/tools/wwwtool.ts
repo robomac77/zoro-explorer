@@ -70,18 +70,20 @@ namespace WebBrowser
          * @param size 记录条数
          * @param page 页码
          */
-		static async getblocks(size: number, page: number)      
+		static async getblocks(size: number, page: number)      // covered
         {
             var str = WWW.makeRpcUrl(  "getblocks", size, page );
             var result = await fetch( str, { "method": "get" } );
             var json = await result.json();
             var r = json["result"];
-            return r as Block[]; // needs most recent 10 blocks returned
+            return r as Block[]; 
         }
         //查询交易列表
-        static async getrawtransactions( size: number, page: number, txtype: string )
+		static async getrawtransactions(size: number, page: number, txtype: string)
+   
         {
-            var str = WWW.makeRpcUrl( "getrawtransactions", size, page, txtype );   
+		   
+			var str = WWW.makeRpcUrl("getrawtransactions", size, page, txtype);  
             var result = await fetch( str, { "method": "get" } );
             var json = await result.json();
             var r = json["result"];
@@ -159,15 +161,15 @@ namespace WebBrowser
             return r;
         }
 
-        static async api_getallnep5assetofaddress(nep5: string) {  
+		static async api_getallnep5assetofaddress(nep5: string) {  // covered
             var str = WWW.makeRpcUrl("getallnep5assetofaddress", nep5, 1);
             var result = await fetch(str, { "method": "get" });
             var json = await result.json();
             var r = json["result"];
-            return r;  // add address to the nep5 table
+            return r;  
         }
 
-        static async getaddrsesstxs(addr: string, size: number, page: number) {
+		static async getaddrsesstxs(addr: string, size: number, page: number) { // covered
             var str = WWW.makeUrl("getaddresstxs", WWW.apiaggr, addr, size, page);
             var result = await fetch(str, { "method": "get"});
             var json = await result.json();
@@ -176,7 +178,7 @@ namespace WebBrowser
                 r = json["result"][0];
                 return r["list"] as TransOfAddress[];
             }
-            return r // database returns all transactions of this address as a list
+            return r 
         }
 
         static async api_getaddrMsg(addr: string) {    // covered ; gets the first use, last use and txcount using address
@@ -211,12 +213,12 @@ namespace WebBrowser
             return r as TransOfAsset[];
         }
 
-        static async api_getnep5count(type:string,nep5id: string) {
+		static async api_getnep5count(type: string, nep5id: string) {// covered
             var str = WWW.makeRpcUrl("getnep5count", type, nep5id);
             var result = await fetch(str, { "method": "get" });
             var json = await result.json();
             var r = json["result"];
-            return r; // add a type column to nep5transfer table for sorting
+            return r; 
         }
         
         //根据txid获取nep5

@@ -61,7 +61,9 @@
             $("#goallasset").empty();
             $("#goallasset").append(html);
 
-            this.loadAssetInfoView(assetid);
+			this.loadAssetInfoView(assetid);
+			
+		
 
             var assetType = locationtool.getType();
             if (assetType == 'nep5') {

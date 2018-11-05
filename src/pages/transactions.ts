@@ -83,7 +83,8 @@ namespace WebBrowser
         {
             this.txlist.find("#txlist-page-transactions").empty();
             //分页查询交易记录
-            let txs: Tx[] = await WWW.getrawtransactions(pageUtil.pageSize, pageUtil.currentPage, txType);
+		
+			let txs: Tx[] = await WWW.getrawtransactions(pageUtil.pageSize, pageUtil.currentPage, txType);
             let txCount = await WWW.gettxcount(txType);
             pageUtil.totalCount = txCount;
 
@@ -96,7 +97,8 @@ namespace WebBrowser
                 listLength = pageUtil.pageSize;
             }
             for (var n = 0; n < listLength; n++ )
-            {
+			{
+				//alert(txs[0].txid + " " + txs[n].txid);
                 let txid = txs[n].txid;
                 let html: string = await this.getTxLine( txid, txs[n].type, txs[n].size.toString(), txs[n].blockindex.toString(), txs[n].vin, txs[n].vout );
                 this.txlist.find( "#txlist-page-transactions" ).append( html );

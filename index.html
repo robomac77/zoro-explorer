@@ -132,46 +132,58 @@
         <!-- Main component for a primary marketing message or call to action -->
         <!-- 首页 -->
         <div id="index-page" >
-            <div class=" container-nel">
-                <div class="title">
-                    <span id="i_summary">Dashboard</span>
-                </div>
-                <div class="row summary">
-                    <div class="col-md-4 ">
-                        <div class="block">
-                            <div class="caption">
-                                <div class="title-summary" id="i_lastblock">Last block</div>
-                                <div class="number" id="blockHeight">0</div>
-                                <div>
-                                    <a id="i_allblock" class="btn btn-nel" target="_self">View all blocks</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 ">
-                        <div class="block">
-                            <div class="caption">
-                                <div class="title-summary" id="i_totaltrans">Total transactions</div>
-                                <div class="number" id="txcount">0</div>
-                                <div>
-                                    <a id="i_alltxlist" class="btn btn-nel" target="_self">View all transactions</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 ">
-                        <div class="block">
-                            <div class="caption">
-                                <div class="title-summary" id="i_walletcreate">Wallet address created</div>
-                                <div class="number" id="addrCount">0</div>
-                                <div>
-                                    <a id="i_alladdress" class="btn btn-nel" target="_self">View all addresses</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+			<div class=" container-nel">
+				<div class="title">
+					<span id="i_summary">Summary</span>
+				</div>
+
+				<div class="row summary">
+					<div class="col-md-4 ">
+						<div class="block">
+							<div class="caption">
+								<div class="title-summary" id="i_lastblock">Last block</div>
+								<div class="number" id="blockHeight">0</div>
+								<div>
+									<a id="i_allblock" class="btn btn-nel" target="_self">View all blocks</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 ">
+						<div class="block">
+							<div class="caption">
+								<div class="title-summary" id="i_totaltrans">Total transactions</div>
+								<div class="number" id="txcount">0</div>
+								<div>
+									<a id="i_alltxlist" class="btn btn-nel" target="_self">View all transactions</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 ">
+						<div class="block">
+							<div class="caption">
+								<div class="title-summary" id="i_walletcreate">App Chains</div>
+								<div class="number" id="addrCount">0</div>
+								<div>
+									<a id="i_alladdress" class="btn btn-nel" target="_self">View all App chains</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 ">
+						<div class="block">
+							<div class="caption">
+								<div class="title-summary" id="i_walletcreate">App Chains</div>
+								<div class="number" id="addrCount">0</div>
+								<div>
+									<a id="i_alladdress" class="btn btn-nel" target="_self">View all App chains</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
             <div class="row">
                 <div class="col-md-6">
                     <div class="title">
@@ -187,7 +199,7 @@
                                     <th id="i_last10_txcount">Tx count</th>
                                 </tr>
                             </thead>
-                            <tbody></tbody>
+							<tbody></tbody>
                         </table>
                         <div class="tfood">
                             <a id="i_viewblocks" href="#blocks-page" target="_self">View all &nbsp; >>>></a>
@@ -199,17 +211,17 @@
                         <span id="i_last10t">Last 10 Transactions</span>
                     </div>
                     <div class="last-info">
-                        <table class="table cool table-nel" id="transactions">
-                            <thead>
-                                <tr>
-                                    <th id="i_last10t_txid">TXID</th>
-                                    <th id="i_last10t_type">Type</th>
-                                    <th id="i_last10t_height">Height</th>
-                                    <th id="i_last10t_size">Size</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
+						<table class="table cool table-nel" id="transactions">
+							<thead>
+								<tr>
+									<th id="i_last10t_txid">TXID</th>
+									<th id="i_last10t_type">Type</th>
+									<th id="i_last10t_height">Height</th>
+									<th id="i_last10t_size">Size</th>
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
                         <div class="tfood">
                             <a class="" id="i_viewtxlist" target="_self">View all &nbsp; >>>></a>
                         </div>
@@ -268,7 +280,6 @@
                     </select>
                 </div>
             </div>
-
             <div class="list-nel">
                 <div class="list-head">
                     <div class="title-content"><span id="trans_txid">TXID</span></div>
@@ -416,7 +427,6 @@
                     <span id="addr_title">Address Information</span>
                     <div class="go-back" id="goalladress"></div>
                 </div>
-
                 <div class="list-nel">
                     <div class="list-head">
                         <div class="line">

@@ -95,8 +95,8 @@ namespace WebBrowser
             //分页查询区块数据
             let blocks: Block[] = await WWW.getblocks( 10, 1 );
             //分页查询交易记录
-            let txs: Tx[] = await WWW.getrawtransactions( 10, 1,'');
-
+         
+			let txs: Tx[] = await WWW.getrawtransactions(10, 1, '');
             $( "#blockHeight" ).text( NumberTool.toThousands( blockHeight ) );//显示在页面
 
             $( "#txcount" ).text( NumberTool.toThousands( txCount ) );//显示在页面
@@ -144,8 +144,8 @@ namespace WebBrowser
                 </tr>`;
             } );
 
-            $( "#index-page" ).find( "#blocks" ).children( "tbody" ).append( html_blocks );
-            $("#index-page").find("#transactions").children("tbody").append(html_txs);
+            $( "#index-page" ).find( "#blocks" ).children("tbody" ).append( html_blocks );
+            $("#index-page").find("#transactions").children("tbody" ).append(html_txs);
 
 
 

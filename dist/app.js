@@ -72,7 +72,7 @@ var WebBrowser;
                 let block = blocks[0];
                 let time = WebBrowser.DateTool.getTime(block.time);
                 $("#hash").text(block.hash);
-                $("#size").text(block.size + ' byte');
+                $("#size").text(block.size + ' bytes');
                 $("#time").text(time);
                 $("#version").text(block.version);
                 $("#index").text(block.index);
@@ -306,7 +306,7 @@ var WebBrowser;
                 var result = yield fetch(str, { "method": "get" });
                 var json = yield result.json();
                 var r = json["result"];
-                return r; // needs most recent 10 blocks returned
+                return r;
             });
         }
         //查询交易列表
@@ -406,7 +406,7 @@ var WebBrowser;
                 var result = yield fetch(str, { "method": "get" });
                 var json = yield result.json();
                 var r = json["result"];
-                return r; // add address to the nep5 table
+                return r;
             });
         }
         static getaddrsesstxs(addr, size, page) {
@@ -419,7 +419,7 @@ var WebBrowser;
                     r = json["result"][0];
                     return r["list"];
                 }
-                return r; // database returns all transactions of this address as a list
+                return r;
             });
         }
         static api_getaddrMsg(addr) {
@@ -466,7 +466,7 @@ var WebBrowser;
                 var result = yield fetch(str, { "method": "get" });
                 var json = yield result.json();
                 var r = json["result"];
-                return r; // add a type column to nep5transfer table for sorting
+                return r;
             });
         }
         //根据txid获取nep5
@@ -1771,6 +1771,7 @@ var WebBrowser;
                     listLength = pageUtil.pageSize;
                 }
                 for (var n = 0; n < listLength; n++) {
+                    //alert(txs[0].txid + " " + txs[n].txid);
                     let txid = txs[n].txid;
                     let html = yield this.getTxLine(txid, txs[n].type, txs[n].size.toString(), txs[n].blockindex.toString(), txs[n].vin, txs[n].vout);
                     this.txlist.find("#txlist-page-transactions").append(html);
@@ -3703,7 +3704,7 @@ var WebBrowser;
                 net_cn: "中文",
                 net_en: "English",
                 // index
-                i_summary: "Summary",
+                i_summary: "Dashboard",
                 i_lastblock: "Last block",
                 i_allblock: "View all blocks",
                 i_totaltrans: "Total transactions",

@@ -33,7 +33,7 @@ namespace WebBrowser {
                                         case "cli":
                                             try {
                                                 let json = await response.json()
-                                                if (json["result"][0]["blockcount"]) {
+                                                if (json["result"][0]["height"]) {
                                                     if (!this.first_host) {
                                                         this.first_host = url_head + host
                                                         callback(this.first_host, json)
