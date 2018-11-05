@@ -1453,8 +1453,10 @@ var WebBrowser;
             this.footer = document.getElementById('footer-box');
             this.viewtxlist = document.getElementById("i_viewtxlist");
             this.viewblocks = document.getElementById("i_viewblocks");
+            this.viewappchains = document.getElementById("i_appchains"); // not represented on index html
             this.alladdress = document.getElementById("i_alladdress");
             this.allblock = document.getElementById("i_allblock");
+            this.allappchain = document.getElementById("i_allappchain");
             this.alltxlist = document.getElementById("i_alltxlist");
             this.cnbtn = document.getElementById("cn-btn");
             this.enbtn = document.getElementById("en-btn");
@@ -1481,6 +1483,7 @@ var WebBrowser;
                 let page_lang = [
                     "i_summary",
                     "i_lastblock", "i_allblock",
+                    "i_lastappchain", "i_allappchain",
                     "i_totaltrans", "i_alltxlist",
                     "i_walletcreate", "i_alladdress",
                     "i_last10", "i_last10_height", "i_last10_size", "i_last10_ctm", "i_last10_txcount", "i_viewblocks",
@@ -1503,8 +1506,10 @@ var WebBrowser;
                 this.getLangs();
                 this.viewtxlist.href = WebBrowser.Url.href_transactions();
                 this.viewblocks.href = WebBrowser.Url.href_blocks();
+                this.viewappchains.href = WebBrowser.Url.href_appchains();
                 this.alladdress.href = WebBrowser.Url.href_addresses();
                 this.allblock.href = WebBrowser.Url.href_blocks();
+                this.allappchain.href = WebBrowser.Url.href_appchains();
                 this.alltxlist.href = WebBrowser.Url.href_transactions();
                 this.div.hidden = false;
                 //查询区块高度(区块数量-1)
@@ -1638,6 +1643,9 @@ var WebBrowser;
     class Url {
         static href_blocks() {
             return WebBrowser.locationtool.getUrl() + '/blocks';
+        }
+        static href_appchains() {
+            return WebBrowser.locationtool.getUrl() + '/appchains';
         }
         static href_transactions() {
             return WebBrowser.locationtool.getUrl() + '/transactions';
@@ -3704,7 +3712,7 @@ var WebBrowser;
                 net_cn: "中文",
                 net_en: "English",
                 // index
-                i_summary: "Dashboard",
+                i_summary: "Summary",
                 i_lastblock: "Last block",
                 i_allblock: "View all blocks",
                 i_totaltrans: "Total transactions",

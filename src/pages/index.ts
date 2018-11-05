@@ -13,9 +13,11 @@ namespace WebBrowser
         div: HTMLDivElement = document.getElementById('index-page') as HTMLDivElement;
         footer: HTMLDivElement = document.getElementById('footer-box') as HTMLDivElement;
         viewtxlist: HTMLAnchorElement = document.getElementById( "i_viewtxlist" ) as HTMLAnchorElement;
-        viewblocks: HTMLAnchorElement = document.getElementById( "i_viewblocks" ) as HTMLAnchorElement;
+		viewblocks: HTMLAnchorElement = document.getElementById("i_viewblocks") as HTMLAnchorElement;
+		viewappchains: HTMLAnchorElement = document.getElementById("i_appchains") as HTMLAnchorElement; // not represented on index html
         alladdress: HTMLAnchorElement = document.getElementById( "i_alladdress" ) as HTMLAnchorElement;
-        allblock: HTMLAnchorElement = document.getElementById( "i_allblock" ) as HTMLAnchorElement;
+		allblock: HTMLAnchorElement = document.getElementById("i_allblock") as HTMLAnchorElement;
+		allappchain: HTMLAnchorElement = document.getElementById("i_allappchain") as HTMLAnchorElement;
         alltxlist: HTMLAnchorElement = document.getElementById("i_alltxlist") as HTMLAnchorElement;
         cnbtn = document.getElementById("cn-btn");
         enbtn = document.getElementById("en-btn");
@@ -26,6 +28,7 @@ namespace WebBrowser
                 let page_lang = [
                     "i_summary",
                     "i_lastblock", "i_allblock",
+					"i_lastappchain", "i_allappchain",
                     "i_totaltrans", "i_alltxlist",
                     "i_walletcreate", "i_alladdress",
                     "i_last10", "i_last10_height", "i_last10_size", "i_last10_ctm", "i_last10_txcount","i_viewblocks",
@@ -81,9 +84,11 @@ namespace WebBrowser
             this.getLangs()
 
             this.viewtxlist.href = Url.href_transactions();
-            this.viewblocks.href = Url.href_blocks();
+			this.viewblocks.href = Url.href_blocks();
+			this.viewappchains.href = Url.href_appchains()
             this.alladdress.href = Url.href_addresses();
-            this.allblock.href = Url.href_blocks();
+			this.allblock.href = Url.href_blocks();
+			this.allappchain.href = Url.href_appchains()
             this.alltxlist.href = Url.href_transactions();
             this.div.hidden = false;
             //查询区块高度(区块数量-1)

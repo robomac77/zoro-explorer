@@ -103,7 +103,10 @@ namespace WebBrowser
         static href_blocks()
         {
             return locationtool.getUrl() + '/blocks';
-        }
+		}
+		static href_appchains() {
+			return locationtool.getUrl() + '/appchains';
+		}
         static href_transactions()
         {
             return locationtool.getUrl() + '/transactions';
