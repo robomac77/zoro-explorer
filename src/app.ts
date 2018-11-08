@@ -36,7 +36,7 @@ namespace WebBrowser
         navbar: Navbar
         netWork: NetWork
         block: Block
-        blocks: Blocks
+		blocks: Blocks
         address: Address
         addresses: Addresses
         transaction: Transaction
@@ -73,7 +73,7 @@ namespace WebBrowser
             this.navbar = new Navbar(this);
             this.netWork = new NetWork(this);
             this.block = new Block(this);
-            this.blocks = new Blocks(this);
+			this.blocks = new Blocks(this);
             this.address = new Address(this);
             this.addresses = new Addresses(this);
             this.transaction = new Transaction(this);
@@ -116,7 +116,7 @@ namespace WebBrowser
             //查询区块数量
             let blockCount = await this.ajax.post('getblockcount', [2]);
             //分页查询区块数据
-            let pageUtil: PageUtil = new PageUtil(blockCount[0]['height'], 15); 
+            let pageUtil: PageUtil = new PageUtil(blockCount[0]['indexx'], 15); 
             let block: Blocks = new Blocks(this);
             block.updateBlocks(pageUtil);
             //监听下一页

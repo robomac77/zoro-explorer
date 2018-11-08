@@ -271,7 +271,7 @@ var WebBrowser;
                 var result = yield fetch(str, { "method": "get" });
                 var json = yield result.json();
                 var r = json["result"];
-                var height = parseInt(r[0]["height"]) - 1;
+                var height = parseInt(r[0]["indexx"]) - 1;
                 return height;
             });
         }
@@ -1453,10 +1453,7 @@ var WebBrowser;
             this.footer = document.getElementById('footer-box');
             this.viewtxlist = document.getElementById("i_viewtxlist");
             this.viewblocks = document.getElementById("i_viewblocks");
-            this.viewappchains = document.getElementById("i_appchains"); // not represented on index html
-            this.alladdress = document.getElementById("i_alladdress");
             this.allblock = document.getElementById("i_allblock");
-            this.allappchain = document.getElementById("i_allappchain");
             this.alltxlist = document.getElementById("i_alltxlist");
             this.cnbtn = document.getElementById("cn-btn");
             this.enbtn = document.getElementById("en-btn");
@@ -1483,7 +1480,6 @@ var WebBrowser;
                 let page_lang = [
                     "i_summary",
                     "i_lastblock", "i_allblock",
-                    "i_lastappchain", "i_allappchain",
                     "i_totaltrans", "i_alltxlist",
                     "i_walletcreate", "i_alladdress",
                     "i_last10", "i_last10_height", "i_last10_size", "i_last10_ctm", "i_last10_txcount", "i_viewblocks",
@@ -1506,10 +1502,7 @@ var WebBrowser;
                 this.getLangs();
                 this.viewtxlist.href = WebBrowser.Url.href_transactions();
                 this.viewblocks.href = WebBrowser.Url.href_blocks();
-                this.viewappchains.href = WebBrowser.Url.href_appchains();
-                this.alladdress.href = WebBrowser.Url.href_addresses();
                 this.allblock.href = WebBrowser.Url.href_blocks();
-                this.allappchain.href = WebBrowser.Url.href_appchains();
                 this.alltxlist.href = WebBrowser.Url.href_transactions();
                 this.div.hidden = false;
                 //查询区块高度(区块数量-1)
@@ -3889,7 +3882,7 @@ var WebBrowser;
                                 case "cli":
                                     try {
                                         let json = yield response.json();
-                                        if (json["result"][0]["height"]) {
+                                        if (json["result"][0]["indexx"]) {
                                             if (!this.first_host) {
                                                 this.first_host = url_head + host;
                                                 callback(this.first_host, json);
@@ -4194,7 +4187,7 @@ var WebBrowser;
                 //查询区块数量
                 let blockCount = yield this.ajax.post('getblockcount', [2]);
                 //分页查询区块数据
-                let pageUtil = new WebBrowser.PageUtil(blockCount[0]['height'], 15);
+                let pageUtil = new WebBrowser.PageUtil(blockCount[0]['indexx'], 15);
                 let block = new WebBrowser.Blocks(this);
                 block.updateBlocks(pageUtil);
                 //监听下一页

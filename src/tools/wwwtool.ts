@@ -4,7 +4,7 @@ namespace WebBrowser
     export class WWW
     {
         static api: string = "http://localhost:59908/api/testnet/";
-        static apiaggr: string = "http://localhost:86/api/testnet/";
+		static apiaggr: string = "http://localhost:86/api/testnet/";
 
         static makeRpcUrl(method: string, ..._params: any[])
         {
@@ -44,7 +44,7 @@ namespace WebBrowser
             var result = await fetch(str, { "method": "get" });
             var json = await result.json();
             var r = json["result"];
-            var height = parseInt(r[0]["height"] as string) - 1;
+            var height = parseInt(r[0]["indexx"] as string) - 1;
             return height;
         }
         //获得交易总数

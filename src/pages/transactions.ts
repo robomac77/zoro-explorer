@@ -140,7 +140,7 @@ namespace WebBrowser
         }
 
 
-        async getTxLine( txid: string, type: string, size: string, index: string, vins, vouts )
+        async getTxLine( txid: string, type: string, size: string, index: string, vins, vouts ) // deleted string datatype for string
         {
             console.log(vins)
             console.log(JSON.stringify(vins));
