@@ -76,7 +76,7 @@
         public async queryBlock( index: number )
         {
             let ajax: Ajax = new Ajax();
-            let blocks: Block[] = await ajax.post( 'getblock', [index] );
+			let blocks: Block[] = await WWW.getblock(index);
             let block: Block = blocks[0];
             let time = DateTool.getTime(block.time);
 
@@ -87,7 +87,7 @@
             $("#index").text(block.index);
             //`<a href="`+ Url.href_block(item.index) + `" target="_self">`
             $("#previos-block").html(`<a href="` + Url.href_block(block.index - 1) + `" target="_self">` + (block.index - 1)+`</a>`);
-            $("#next-block").html(`<a href="` + Url.href_block(block.index + 1) + `" target="_self">` + (block.index + 1) + `</a>`);
+			$("#next-block").html(`<a href="` + Url.href_block(block.index + 1) + `" target="_self">` + (Number(block.index) + 1) + `</a>`);
             this.txs = block.tx;
             let txsLength = this.txs.length;
             this.pageUtil = new PageUtil(this.txs.length, 10);

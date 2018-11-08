@@ -68,7 +68,7 @@ var WebBrowser;
         queryBlock(index) {
             return __awaiter(this, void 0, void 0, function* () {
                 let ajax = new WebBrowser.Ajax();
-                let blocks = yield ajax.post('getblock', [index]);
+                let blocks = yield WebBrowser.WWW.getblock(index);
                 let block = blocks[0];
                 let time = WebBrowser.DateTool.getTime(block.time);
                 $("#hash").text(block.hash);
@@ -78,7 +78,7 @@ var WebBrowser;
                 $("#index").text(block.index);
                 //`<a href="`+ Url.href_block(item.index) + `" target="_self">`
                 $("#previos-block").html(`<a href="` + WebBrowser.Url.href_block(block.index - 1) + `" target="_self">` + (block.index - 1) + `</a>`);
-                $("#next-block").html(`<a href="` + WebBrowser.Url.href_block(block.index + 1) + `" target="_self">` + (block.index + 1) + `</a>`);
+                $("#next-block").html(`<a href="` + WebBrowser.Url.href_block(block.index + 1) + `" target="_self">` + (Number(block.index) + 1) + `</a>`);
                 this.txs = block.tx;
                 let txsLength = this.txs.length;
                 this.pageUtil = new WebBrowser.PageUtil(this.txs.length, 10);
@@ -303,6 +303,15 @@ var WebBrowser;
         static getblocks(size, page) {
             return __awaiter(this, void 0, void 0, function* () {
                 var str = WWW.makeRpcUrl("getblocks", size, page);
+                var result = yield fetch(str, { "method": "get" });
+                var json = yield result.json();
+                var r = json["result"];
+                return r;
+            });
+        }
+        static getblock(index) {
+            return __awaiter(this, void 0, void 0, function* () {
+                var str = WWW.makeRpcUrl("getblock", index);
                 var result = yield fetch(str, { "method": "get" });
                 var json = yield result.json();
                 var r = json["result"];

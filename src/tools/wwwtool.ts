@@ -77,7 +77,17 @@ namespace WebBrowser
             var json = await result.json();
             var r = json["result"];
             return r as Block[]; 
-        }
+		}
+
+		static async getblock(index: number)      // covered
+		{
+			var str = WWW.makeRpcUrl("getblock", index);
+			var result = await fetch(str, { "method": "get" });
+			var json = await result.json();
+			var r = json["result"];
+			return r as Block[];
+		}
+
         //查询交易列表
 		static async getrawtransactions(size: number, page: number, txtype: string)
    
