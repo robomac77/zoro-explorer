@@ -14,6 +14,7 @@ namespace WebBrowser
         footer: HTMLDivElement = document.getElementById('footer-box') as HTMLDivElement;
         viewtxlist: HTMLAnchorElement = document.getElementById( "i_viewtxlist" ) as HTMLAnchorElement;
 		viewblocks: HTMLAnchorElement = document.getElementById("i_viewblocks") as HTMLAnchorElement;
+		alladdress: HTMLAnchorElement = document.getElementById("i_alladdress") as HTMLAnchorElement;
 		allblock: HTMLAnchorElement = document.getElementById("i_allblock") as HTMLAnchorElement;
         alltxlist: HTMLAnchorElement = document.getElementById("i_alltxlist") as HTMLAnchorElement;
         cnbtn = document.getElementById("cn-btn");
@@ -81,13 +82,14 @@ namespace WebBrowser
 
             this.viewtxlist.href = Url.href_transactions();
 			this.viewblocks.href = Url.href_blocks();
+			this.alladdress.href = Url.href_addresses();
 			this.allblock.href = Url.href_blocks();
             this.alltxlist.href = Url.href_transactions();
             this.div.hidden = false;
             //查询区块高度(区块数量-1)
             let blockHeight = await WWW.api_getHeight();
             //查询交易数量
-            let txCount: number = await WWW.gettxcount("");   // 
+            let txCount: number = await WWW.gettxcount("");   
             //查询地址总数
             let addrCount: number = await WWW.getaddrcount();
             //分页查询区块数据

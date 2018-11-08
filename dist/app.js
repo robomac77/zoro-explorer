@@ -1453,6 +1453,7 @@ var WebBrowser;
             this.footer = document.getElementById('footer-box');
             this.viewtxlist = document.getElementById("i_viewtxlist");
             this.viewblocks = document.getElementById("i_viewblocks");
+            this.alladdress = document.getElementById("i_alladdress");
             this.allblock = document.getElementById("i_allblock");
             this.alltxlist = document.getElementById("i_alltxlist");
             this.cnbtn = document.getElementById("cn-btn");
@@ -1502,13 +1503,14 @@ var WebBrowser;
                 this.getLangs();
                 this.viewtxlist.href = WebBrowser.Url.href_transactions();
                 this.viewblocks.href = WebBrowser.Url.href_blocks();
+                this.alladdress.href = WebBrowser.Url.href_addresses();
                 this.allblock.href = WebBrowser.Url.href_blocks();
                 this.alltxlist.href = WebBrowser.Url.href_transactions();
                 this.div.hidden = false;
                 //查询区块高度(区块数量-1)
                 let blockHeight = yield WebBrowser.WWW.api_getHeight();
                 //查询交易数量
-                let txCount = yield WebBrowser.WWW.gettxcount(""); // 
+                let txCount = yield WebBrowser.WWW.gettxcount("");
                 //查询地址总数
                 let addrCount = yield WebBrowser.WWW.getaddrcount();
                 //分页查询区块数据
