@@ -13,7 +13,8 @@
             if (this.langType != this.app.langmgr.type) {
                 let page_lang = [
                     "block_info_title",
-                    "block_info_block",
+					"block_info_block",
+					"block_info_chainhash",
                     "block_info_hash",
                     "block_info_time",
                     "block_info_size",
@@ -80,7 +81,8 @@
             let block: Block = blocks[0];
             let time = DateTool.getTime(block.time);
 
-            $("#hash" ).text( block.hash );
+			$("#hash").text(block.hash);
+			$("#chainhash").text(block.chainhash);
             $("#size" ).text( block.size + ' bytes' );
             $("#time").text(time);
             $("#version" ).text( block.version );

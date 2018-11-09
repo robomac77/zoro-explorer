@@ -19,6 +19,7 @@ var WebBrowser;
                 let page_lang = [
                     "block_info_title",
                     "block_info_block",
+                    "block_info_chainhash",
                     "block_info_hash",
                     "block_info_time",
                     "block_info_size",
@@ -72,6 +73,7 @@ var WebBrowser;
                 let block = blocks[0];
                 let time = WebBrowser.DateTool.getTime(block.time);
                 $("#hash").text(block.hash);
+                $("#chainhash").text(block.chainhash);
                 $("#size").text(block.size + ' bytes');
                 $("#time").text(time);
                 $("#version").text(block.version);
@@ -3631,7 +3633,8 @@ var WebBrowser;
                 // block
                 block_info_title: "区块信息",
                 block_info_block: "区块",
-                block_info_hash: "Hash",
+				block_info_hash: "Hash",
+				block_info_chainhash: "Chain Hash",
                 block_info_time: "时间",
                 block_info_size: "大小",
                 block_info_pre: "上一个区块",
@@ -3768,7 +3771,8 @@ var WebBrowser;
                 // block
                 block_info_title: "Block Information",
                 block_info_block: "Block",
-                block_info_hash: "Hash",
+				block_info_hash: "Hash",
+				block_info_chainhash:"Chain Hash",
                 block_info_time: "Time",
                 block_info_size: "Size",
                 block_info_pre: "Previous Block",
