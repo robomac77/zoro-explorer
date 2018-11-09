@@ -14,7 +14,7 @@ namespace WebBrowser
         {
             if (this.langType != this.app.langmgr.type) {
                 let page_lang = [
-                    "blocks_title", "blocks_height", "blocks_size", "blocks_time", "blocks_txcount"
+                    "blocks_title", "blocks_appchain", "blocks_height", "blocks_size", "blocks_time", "blocks_txcount"
                 ]
                 page_lang.forEach(
                     lang => {
@@ -88,12 +88,15 @@ namespace WebBrowser
             blocks.forEach((item, index, input) => {
                 //newDate.setTime(item.time * 1000);
                 let time = DateTool.getTime(item.time);
-                let txcounts = item.tx.length
+				let txcounts = item.tx.length
+				var id = item.chainhash
+					id.replace('0x', '');
+				id = id.substring(0, 6) + '...' + id.substring(id.length - 6);
 
                 let html = `
                 <tr>
-                <td><a href="`+ Url.href_block(item.index) + `" target="_self">` + item.index + `</a></td>
-                <td>` + item.size + ` bytes</td><td>` + time + `</td>
+                <td><a href="`+ Url.href_appchain(id) + `" target="_self">` + id + `</a></td>
+                <td>` + item.size + ` bytes</td><td>` + time + `</td><td>` + item.index + `</td>
                 <td>` + txcounts + `</td>
                 </tr>`;
                 $("#blocks-page").find("tbody").append(html);

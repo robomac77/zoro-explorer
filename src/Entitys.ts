@@ -125,7 +125,10 @@ namespace WebBrowser
         static href_block( block: number )
         {
             return locationtool.getUrl() +  "/block/" + block;
-        }
+		}
+		static href_appchain(block: string) {
+			return locationtool.getUrl() + "/block/" + block;
+		}
         static href_transaction( tx: string )
         {
             return locationtool.getUrl() +  "/transaction/" + tx;
@@ -172,7 +175,8 @@ namespace WebBrowser
         time: number;
         index: number;
         nonce: string;
-        nextconsensus: string;
+		nextconsensus: string;
+		chainhash: string;
         script: {
             invocation: string;
             verification: string;
@@ -283,7 +287,18 @@ namespace WebBrowser
         owner: string;
         admin: string;
         id: string;     //assetid
-    }
+	}
+
+	export interface Appchain {
+		version: number;
+		hash: string;
+		name: string;      
+		owner: string;
+		timestamp: number;  
+		seedlist: [];
+		validators: [];
+
+	}
 
 
     export class Nep5as implements Asset

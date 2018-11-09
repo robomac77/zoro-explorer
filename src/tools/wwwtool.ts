@@ -127,12 +127,20 @@ namespace WebBrowser
 
         static async api_getAllAssets()        // covered; gets all id from asset
         {
-            var str = WWW.makeRpcUrl( "getallasset");
+            var str = WWW.makeRpcUrl( "getallassets");
             var result = await fetch(str, { "method": "get" });
             var json = await result.json();
             var r = json["result"];
             return r;
-        }
+		}
+		static async api_getAllAppchains()        // covered; gets all id from asset
+		{
+			var str = WWW.makeRpcUrl("getallappchains");
+			var result = await fetch(str, { "method": "get" });
+			var json = await result.json();
+			var r = json["result"];
+			return r;
+		}
         static async api_getUTXOCount(address: string)
         {
             var str = WWW.makeRpcUrl( "getutxo", address);

@@ -104,7 +104,7 @@ namespace WebBrowser
                 this.txlist.find( "#txlist-page-transactions" ).append( html );
             }
 
-            let minNum = pageUtil.currentPage * pageUtil.pageSize - pageUtil.pageSize;
+            let minNum = pageUtil.currentPage * pageUtil.pageSize - pageUtil.pageSize; //       
             let maxNum = pageUtil.totalCount;
             let diffNum = maxNum - minNum;
             if (diffNum > 15) {

@@ -1,7 +1,7 @@
 ﻿namespace WebBrowser
 {
     //资产页面管理器
-    export class Assets implements Page
+    export class Appchains implements Page
     {
         app: App
         langType: string;
@@ -15,7 +15,7 @@
         }
         private pageUtil: PageUtil;
         private assetlist: JQuery<HTMLElement>;
-        private assets: Asset[];
+        private appchains: Appchain[];
         private nep5s: nep5Asset[];
         private assetType: string;
 
@@ -27,7 +27,8 @@
                     "assets_id",
                     "assets_type",
                     "assets_ava",
-                    "assets_pre",
+					"assets_pre",
+					"assets_val",
                 ]
                 page_lang.forEach(
                     lang => {
@@ -51,13 +52,13 @@
                 this.pageUtil.currentPage = 1;
                 this.assetType = <string>$("#asset-TxType").val();
                 if (this.assetType == "Assets") {
-                    this.pageUtil = new PageUtil(this.assets.length, 15);
+                    this.pageUtil = new PageUtil(this.appchains.length, 15);
                     this.pageUtil.currentPage = 1;
-                    if (this.assets.length > 15) {
+                    if (this.appchains.length > 15) {
                         this.updateAssets(this.pageUtil);
                         this.assetlist.find(".page").show();
                     } else {
-                        this.loadAssetView(this.assets);
+                        this.loadAssetView(this.appchains);
                         let pageMsg = "Assets 1 to " + this.pageUtil.totalCount + " of " + this.pageUtil.totalCount;
                         $("#asset-page").find("#asset-page-msg").html(pageMsg);
                         this.assetlist.find(".page").hide();
@@ -114,7 +115,7 @@
             }
             let arrAsset = new Array();
             for (let i = minNum; i < maxNum;i++) {
-                arrAsset.push(this.assets[i]);
+                arrAsset.push(this.appchains[i]);
             }
             this.loadAssetView(arrAsset);
 
@@ -159,13 +160,13 @@
             
             $("#asset-TxType").val("Assets");
             this.assetType = <string>$("#asset-TxType").val();
-            this.assets = await WWW.api_getAllAssets();
-            this.pageUtil = new PageUtil(this.assets.length, 15);
-            if (this.assets.length > 15) {
+            this.appchains = await WWW.api_getAllAppchains(); 
+            this.pageUtil = new PageUtil(this.appchains.length, 15);
+            if (this.appchains.length > 15) {
                 this.updateAssets(this.pageUtil);
                 this.assetlist.find(".page").show();
             } else {
-                this.loadAssetView(this.assets);
+                this.loadAssetView(this.appchains);
                 let pageMsg = "Assets 1 to " + this.pageUtil.totalCount + " of " + this.pageUtil.totalCount;
                 $("#asset-page").find("#asset-page-msg").html(pageMsg);
                 this.assetlist.find(".page").hide();
@@ -180,19 +181,24 @@
         /**
          * loadView 页面展现
          */
-        public loadAssetView(assets: Asset[])
+        public loadAssetView(appchains: Appchain[])
         {
             $( "#assets" ).empty();
-            assets.forEach((asset: Asset) => {
-                let href = Url.href_asset(asset.id);
-                let assetId = asset.id.substring(2, 6) + '...' + asset.id.substring(asset.id.length - 4);
+            appchains.forEach((appchain: Appchain) => {
+                let href = Url.href_asset(appchain.hash);
+				let chainhash = appchain.hash.substring(2, 6) + '...' + appchain.hash.substring(appchain.hash.length - 4);
+				let chainowner = appchain.owner.substring(2, 6) + '...' + appchain.owner.substring(appchain.owner.length - 4);
+
+				let time = DateTool.getTime(appchain.timestamp);
                 let html = `
                     <tr>
-                    <td> <a href="`+ href + `" target="_self">` + CoinTool.assetID2name[asset.id] + `</a></td>
-                    <td> <a href="`+ href + `" target="_self">` + assetId + `</a></td>
-                    <td>` + asset.type + `</td>
-                    <td>` + (asset.amount <= 0 ? asset.available : asset.amount) + `</td>
-                    <td>` + asset.precision + `</td>
+                    <td> <a href="`+ href + `" target="_self">` + appchain.name + `</a></td>
+                    <td> <a href="`+ href + `" target="_self">` + chainhash + `</a></td>
+                    <td>` + chainowner + `</td>
+                    <td>` + time + `</td>
+                    <td>` + appchain.version + `</td>
+         
+
                     </tr>`;
                 $("#assets").append(html);
             });

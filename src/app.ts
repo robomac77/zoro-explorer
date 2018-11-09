@@ -41,7 +41,7 @@ namespace WebBrowser
         addresses: Addresses
         transaction: Transaction
         transactions: Transactions
-        assets: Assets
+        assets: Appchains
         indexpage: Index
         assetinfo: AssetInfo
 
@@ -78,7 +78,7 @@ namespace WebBrowser
             this.addresses = new Addresses(this);
             this.transaction = new Transaction(this);
             this.transactions = new Transactions(this);
-            this.assets = new Assets(this);
+            this.assets = new Appchains(this);
             this.indexpage = new Index( this );
             this.assetinfo = new AssetInfo(this);
 

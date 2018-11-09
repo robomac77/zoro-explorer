@@ -152,7 +152,7 @@ var WebBrowser;
         getLangs() {
             if (this.langType != this.app.langmgr.type) {
                 let page_lang = [
-                    "blocks_title", "blocks_height", "blocks_size", "blocks_time", "blocks_txcount"
+                    "blocks_title", "blocks_appchain", "blocks_height", "blocks_size", "blocks_time", "blocks_txcount"
                 ];
                 page_lang.forEach(lang => {
                     document.getElementById(lang).textContent = this.app.langmgr.get(lang);
@@ -221,10 +221,13 @@ var WebBrowser;
                     //newDate.setTime(item.time * 1000);
                     let time = WebBrowser.DateTool.getTime(item.time);
                     let txcounts = item.tx.length;
+                    var id = item.chainhash;
+                    id.replace('0x', '');
+                    id = id.substring(0, 6) + '...' + id.substring(id.length - 6);
                     let html = `
                 <tr>
-                <td><a href="` + WebBrowser.Url.href_block(item.index) + `" target="_self">` + item.index + `</a></td>
-                <td>` + item.size + ` bytes</td><td>` + time + `</td>
+                <td><a href="` + WebBrowser.Url.href_appchain(id) + `" target="_self">` + id + `</a></td>
+                <td>` + item.size + ` bytes</td><td>` + time + `</td><td>` + item.index + `</td>
                 <td>` + txcounts + `</td>
                 </tr>`;
                     $("#blocks-page").find("tbody").append(html);
@@ -357,7 +360,16 @@ var WebBrowser;
         }
         static api_getAllAssets() {
             return __awaiter(this, void 0, void 0, function* () {
-                var str = WWW.makeRpcUrl("getallasset");
+                var str = WWW.makeRpcUrl("getallassets");
+                var result = yield fetch(str, { "method": "get" });
+                var json = yield result.json();
+                var r = json["result"];
+                return r;
+            });
+        }
+        static api_getAllAppchains() {
+            return __awaiter(this, void 0, void 0, function* () {
+                var str = WWW.makeRpcUrl("getallappchains");
                 var result = yield fetch(str, { "method": "get" });
                 var json = yield result.json();
                 var r = json["result"];
@@ -1251,7 +1263,7 @@ var WebBrowser;
 var WebBrowser;
 (function (WebBrowser) {
     //资产页面管理器
-    class Assets {
+    class Appchains {
         constructor(app) {
             this.div = document.getElementById("asset-page");
             this.footer = document.getElementById('footer-box');
@@ -1262,14 +1274,14 @@ var WebBrowser;
                 this.pageUtil.currentPage = 1;
                 this.assetType = $("#asset-TxType").val();
                 if (this.assetType == "Assets") {
-                    this.pageUtil = new WebBrowser.PageUtil(this.assets.length, 15);
+                    this.pageUtil = new WebBrowser.PageUtil(this.appchains.length, 15);
                     this.pageUtil.currentPage = 1;
-                    if (this.assets.length > 15) {
+                    if (this.appchains.length > 15) {
                         this.updateAssets(this.pageUtil);
                         this.assetlist.find(".page").show();
                     }
                     else {
-                        this.loadAssetView(this.assets);
+                        this.loadAssetView(this.appchains);
                         let pageMsg = "Assets 1 to " + this.pageUtil.totalCount + " of " + this.pageUtil.totalCount;
                         $("#asset-page").find("#asset-page-msg").html(pageMsg);
                         this.assetlist.find(".page").hide();
@@ -1332,6 +1344,7 @@ var WebBrowser;
                     "assets_type",
                     "assets_ava",
                     "assets_pre",
+                    "assets_val",
                 ];
                 page_lang.forEach(lang => {
                     document.getElementById(lang).textContent = this.app.langmgr.get(lang);
@@ -1351,7 +1364,7 @@ var WebBrowser;
                 }
                 let arrAsset = new Array();
                 for (let i = minNum; i < maxNum; i++) {
-                    arrAsset.push(this.assets[i]);
+                    arrAsset.push(this.appchains[i]);
                 }
                 this.loadAssetView(arrAsset);
                 let pageMsg = "Assets " + (minNum + 1) + " to " + maxNum + " of " + pageUtil.totalCount;
@@ -1397,14 +1410,14 @@ var WebBrowser;
                 this.getLangs();
                 $("#asset-TxType").val("Assets");
                 this.assetType = $("#asset-TxType").val();
-                this.assets = yield WebBrowser.WWW.api_getAllAssets();
-                this.pageUtil = new WebBrowser.PageUtil(this.assets.length, 15);
-                if (this.assets.length > 15) {
+                this.appchains = yield WebBrowser.WWW.api_getAllAppchains();
+                this.pageUtil = new WebBrowser.PageUtil(this.appchains.length, 15);
+                if (this.appchains.length > 15) {
                     this.updateAssets(this.pageUtil);
                     this.assetlist.find(".page").show();
                 }
                 else {
-                    this.loadAssetView(this.assets);
+                    this.loadAssetView(this.appchains);
                     let pageMsg = "Assets 1 to " + this.pageUtil.totalCount + " of " + this.pageUtil.totalCount;
                     $("#asset-page").find("#asset-page-msg").html(pageMsg);
                     this.assetlist.find(".page").hide();
@@ -1417,18 +1430,22 @@ var WebBrowser;
         /**
          * loadView 页面展现
          */
-        loadAssetView(assets) {
+        loadAssetView(appchains) {
             $("#assets").empty();
-            assets.forEach((asset) => {
-                let href = WebBrowser.Url.href_asset(asset.id);
-                let assetId = asset.id.substring(2, 6) + '...' + asset.id.substring(asset.id.length - 4);
+            appchains.forEach((appchain) => {
+                let href = WebBrowser.Url.href_asset(appchain.hash);
+                let chainhash = appchain.hash.substring(2, 6) + '...' + appchain.hash.substring(appchain.hash.length - 4);
+                let chainowner = appchain.owner.substring(2, 6) + '...' + appchain.owner.substring(appchain.owner.length - 4);
+                let time = WebBrowser.DateTool.getTime(appchain.timestamp);
                 let html = `
                     <tr>
-                    <td> <a href="` + href + `" target="_self">` + WebBrowser.CoinTool.assetID2name[asset.id] + `</a></td>
-                    <td> <a href="` + href + `" target="_self">` + assetId + `</a></td>
-                    <td>` + asset.type + `</td>
-                    <td>` + (asset.amount <= 0 ? asset.available : asset.amount) + `</td>
-                    <td>` + asset.precision + `</td>
+                    <td> <a href="` + href + `" target="_self">` + appchain.name + `</a></td>
+                    <td> <a href="` + href + `" target="_self">` + chainhash + `</a></td>
+                    <td>` + chainowner + `</td>
+                    <td>` + time + `</td>
+                    <td>` + appchain.version + `</td>
+         
+
                     </tr>`;
                 $("#assets").append(html);
             });
@@ -1450,7 +1467,7 @@ var WebBrowser;
             });
         }
     }
-    WebBrowser.Assets = Assets;
+    WebBrowser.Appchains = Appchains;
 })(WebBrowser || (WebBrowser = {}));
 /// <reference path="../app.ts"/>
 var WebBrowser;
@@ -1537,12 +1554,16 @@ var WebBrowser;
                     //var newDate = new Date();
                     //newDate.setTime(item.time * 1000);
                     let time = WebBrowser.DateTool.getTime(item.time);
+                    var id = item.chainhash;
+                    id.replace('0x', '');
+                    id = id.substring(0, 6) + '...' + id.substring(id.length - 6);
                     html_blocks += `
                 <tr><td>
-                <a class="code" target="_self" href ='` + WebBrowser.Url.href_block(item.index) + `' > 
-                ` + item.index + `</a></td>
+                <a class="code" target="_self" href ='` + WebBrowser.Url.href_appchain(id) + `' > 
+                ` + id + `</a></td>
                 <td>` + item.size + ` bytes</td>
                 <td>` + time + `</td>
+                <td>` + item.index + `</td>
                 <td>` + item.tx.length + `</td></tr>`;
                 });
                 txs.forEach((tx) => {
@@ -1664,6 +1685,9 @@ var WebBrowser;
             return WebBrowser.locationtool.getUrl() + '/nnsevent';
         }
         static href_block(block) {
+            return WebBrowser.locationtool.getUrl() + "/block/" + block;
+        }
+        static href_appchain(block) {
             return WebBrowser.locationtool.getUrl() + "/block/" + block;
         }
         static href_transaction(tx) {
@@ -1788,7 +1812,7 @@ var WebBrowser;
                     let html = yield this.getTxLine(txid, txs[n].type, txs[n].size.toString(), txs[n].blockindex.toString(), txs[n].vin, txs[n].vout);
                     this.txlist.find("#txlist-page-transactions").append(html);
                 }
-                let minNum = pageUtil.currentPage * pageUtil.pageSize - pageUtil.pageSize;
+                let minNum = pageUtil.currentPage * pageUtil.pageSize - pageUtil.pageSize; //       
                 let maxNum = pageUtil.totalCount;
                 let diffNum = maxNum - minNum;
                 if (diffNum > 15) {
@@ -4172,7 +4196,7 @@ var WebBrowser;
             this.addresses = new WebBrowser.Addresses(this);
             this.transaction = new WebBrowser.Transaction(this);
             this.transactions = new WebBrowser.Transactions(this);
-            this.assets = new WebBrowser.Assets(this);
+            this.assets = new WebBrowser.Appchains(this);
             this.indexpage = new WebBrowser.Index(this);
             this.assetinfo = new WebBrowser.AssetInfo(this);
             this.notfound = new WebBrowser.Notfound(this);

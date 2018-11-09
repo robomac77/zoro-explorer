@@ -113,14 +113,18 @@ namespace WebBrowser
             {
                 //var newDate = new Date();
                 //newDate.setTime(item.time * 1000);
-                let time = DateTool.getTime(item.time);
+				let time = DateTool.getTime(item.time);
+				var id = item.chainhash
+				id.replace('0x', '');
+				id = id.substring(0, 6) + '...' + id.substring(id.length - 6);
 
                 html_blocks += `
                 <tr><td>
-                <a class="code" target="_self" href ='`+ Url.href_block( item.index ) + `' > 
-                `+ item.index + `</a></td>
+                <a class="code" target="_self" href ='`+ Url.href_appchain(id) + `' > 
+                `+ id + `</a></td>
                 <td>` + item.size + ` bytes</td>
                 <td>` + time + `</td>
+                <td>` + item.index + `</td>
                 <td>` + item.tx.length + `</td></tr>`;
             } );
 
