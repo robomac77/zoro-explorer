@@ -28,7 +28,7 @@ namespace WebBrowser
                     "i_lastblock", "i_allblock",
                     "i_totaltrans", "i_alltxlist",
                     "i_walletcreate", "i_alladdress",
-                    "i_last10", "i_last10_height", "i_last10_size", "i_last10_ctm", "i_last10_txcount","i_viewblocks",
+                    "i_last10", "i_appchain", "i_last10_height", "i_last10_size", "i_last10_ctm", "i_last10_txcount","i_viewblocks",
                     "i_last10t", "i_last10t_txid", "i_last10t_type", "i_last10t_height", "i_last10t_size", "i_viewtxlist",
                     
                 ]
